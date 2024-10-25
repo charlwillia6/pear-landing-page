@@ -31,7 +31,7 @@ import {
 } from "./ui/dropdown-menu";
 import { Info } from "lucide-react";
 import Spinner from "./ui/spinner";
-import Link from "next/link";
+import Footer from "./footer";
 
 interface ExtendedPricingTierProps extends PricingTierProps {
   disabled?: boolean;
@@ -132,8 +132,8 @@ const PricingTier: React.FC<ExtendedPricingTierProps> = ({
       return (
         <div className="flex items-center">
           <span>
-            Monthly refill of increased PearAI Credits for market-leading AI
-            models
+            Monthly refill of <span className="underline"> increased</span>{" "}
+            PearAI Credits for market-leading AI models
             <PearCreditsTooltip type="enterprise" />
           </span>
         </div>
@@ -346,7 +346,6 @@ const PricingTier: React.FC<ExtendedPricingTierProps> = ({
               </div>
             ))
           )}
-
           {!isFree && (
             <>
               {disabled ? (
@@ -366,10 +365,6 @@ const PricingTier: React.FC<ExtendedPricingTierProps> = ({
               )}
             </>
           )}
-
-          {/* <button className="bg-primary-800 py-2 px-4 w-full rounded-full text-sm font-medium hover:bg-primary-800"> */}
-          {/* Get Started */}
-          {/* </button> */}
         </CardFooter>
       </div>
     </Card>
@@ -388,7 +383,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ user }) => {
           <header className="mx-auto mt-16 max-w-4xl space-y-4 text-center sm:mt-0 sm:space-y-6">
             <h1
               id="pricing-heading"
-              className="mt-8 text-4xl font-medium leading-tight sm:text-5xl md:text-5xl lg:text-5xl"
+              className="mt-8 text-4xl font-medium leading-tight sm:text-4xl md:text-4xl lg:text-4xl"
             >
               Speed up your
               <br />
@@ -403,13 +398,13 @@ const PricingPage: React.FC<PricingPageProps> = ({ user }) => {
             <TabsList className="h-full rounded-full bg-gray-300/20 px-2 py-2 ring-1 ring-gray-300/60 dark:bg-gray-100/10 dark:ring-gray-100/40">
               <TabsTrigger
                 value="standard"
-                className="w-[135px] rounded-full px-4 py-2 text-white-main data-[state=active]:bg-primary-800"
+                className="w-[135px] rounded-full px-4 py-2 text-secondary-main data-[state=active]:bg-primary-800 dark:text-white-main"
               >
                 Standard
               </TabsTrigger>
               <TabsTrigger
                 value="enterprise"
-                className="ml-[6px] w-[135px] rounded-full px-4 py-2 text-white-main data-[state=active]:bg-primary-800"
+                className="ml-[6px] w-[135px] rounded-full px-4 py-2 text-secondary-main data-[state=active]:bg-primary-800 dark:text-white-main"
               >
                 Enterprise
               </TabsTrigger>
@@ -519,6 +514,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ user }) => {
           </Tabs>
         </div>
       </div>
+      <Footer />
     </section>
   );
 };

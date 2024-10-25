@@ -1,20 +1,12 @@
 import { z } from "zod";
-import disposableEmailDomains from "@/data/disposable-email-domains.json";
-
-const isDisposableEmail = (email: string) => {
-  const emailDomain = email.split("@").pop();
-
-  if (!emailDomain) return false;
-
-  return (disposableEmailDomains as Record<string, boolean>)[emailDomain];
-};
+import { isDisposableEmail } from "./disposable-email";
 
 export const emailSchema = z.object({
   email: z
     .string()
     .email({ message: "Email address is invalid." })
-    .refine((email) => !isDisposableEmail(email), {
-      message: "Disposable email addresses are not allowed.",
+    .refine(async (email) => !(await isDisposableEmail(email)), {
+      message: "Invalid email address.",
     }),
 });
 
@@ -32,9 +24,14 @@ export const signUpSchema = z.object({
   email: emailSchema.shape.email,
   company_name: z
     .string()
-    .max(100, { message: "Company name is too long." })
+    .max(30, { message: "Company name is too long." })
     .optional(),
   password: passwordSchema.shape.password,
+  heard_about_us: z
+    .string({
+      required_error: "Please tell us how you heard about us.",
+    })
+    .max(30, { message: "Message too long" }),
 });
 
 export const signInSchema = z.object({

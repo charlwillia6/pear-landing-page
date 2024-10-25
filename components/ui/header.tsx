@@ -16,6 +16,7 @@ import AuthButton from "./authbutton";
 import MobileMenu from "./mobile-menu";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
+import DownloadButton from "./downloadbutton";
 
 const NavItem = ({
   href,
@@ -103,8 +104,8 @@ export default async function Header() {
                   className="flex flex-shrink-0 items-center"
                   aria-label="PearAI Home"
                 >
-                  <PearGreenLogo />
-                  <div className="h4 ml-2">PearAI</div>
+                  <PearGreenLogo className="mb-1 h-8" />
+                  <div className="h4 ml-2 text-primary-700">PearAI</div>
                 </Link>
                 <nav className="ml-10 hidden md:block" aria-label="Main menu">
                   <NavigationMenu>
@@ -126,10 +127,10 @@ export default async function Header() {
                           </ListItem>
                         </ul>
                       </DropdownNavItem>
-                      <NavItem href="/pricing">Pricing / Download</NavItem>
+                      <NavItem href="/pricing">Pricing</NavItem>
                       <NavItem href="/docs">Documentation</NavItem>
                       <NavItem
-                        href="https://github.com/trypear/pearai-app"
+                        href="https://github.com/trypear/pearai-master"
                         target="_blank"
                       >
                         GitHub ⭐️
@@ -138,11 +139,12 @@ export default async function Header() {
                   </NavigationMenu>
                 </nav>
               </div>
-              <div className="hidden items-center space-x-4 md:flex">
+              <div className="hidden items-center space-x-4 lg:flex">
+                <DownloadButton user={user} />
                 <AuthButton />
                 <DarkModeToggle />
               </div>
-              <div className="md:hidden">
+              <div className="lg:hidden">
                 <MobileMenu user={user} handleSignOut={handleSignOut} />
               </div>
             </div>
